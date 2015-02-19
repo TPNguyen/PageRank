@@ -21,9 +21,9 @@ public class PageRank {
 		this.numNodes = numNodes;
 		this.numEdges = edges.size();
 		initializeMatrix();
-		r = Matrix.makeVector(numNodes,1/numNodes);
+		r = Matrix.makeVector(numNodes,(double)1/numNodes);
 		this.beta = beta;
-		teleport = Matrix.makeVector(numNodes,(1-beta)/numNodes);
+		teleport = Matrix.makeVector(numNodes,(double)(1-beta)/numNodes);
 	}
 	
 	public double[] powerIterate(int iterations){
@@ -32,14 +32,6 @@ public class PageRank {
 			Matrix.constMultVector(beta,r);
 			r = Matrix.addVectors(teleport,r);
 		}
-		return r;
-	}
-	
-	public double[][] getMatrix(){
-		return M;
-	}
-	
-	public double[] getRankings(){
 		return r;
 	}
 	
@@ -54,6 +46,18 @@ public class PageRank {
 			M[to-1][from-1] = M[to-1][from-1] + 1;
 		}
 		Matrix.constrainSumToOne(M);
+	}
+	
+	public double[][] getMatrix(){
+		return M;
+	}
+	
+	public double[] getRankings(){
+		return r;
+	}
+	
+	public double[] getTeleport(){
+		return teleport;
 	}
 	
 	private void readEdges(String file){

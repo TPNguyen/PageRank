@@ -1,5 +1,7 @@
 package assignment3;
 
+import java.util.ArrayList;
+
 public class Matrix {
 	
 	//Vector is actually a row vector so we use the transpose of it
@@ -69,5 +71,14 @@ public class Matrix {
 			ar[i] = value;
 		}
 		return ar;
+	}
+	
+	public static ArrayList<Double> convertToArrayList(double[] ar){
+		int size = ar.length;
+		ArrayList<Double> list = new ArrayList<Double>(size);
+		for(int i = 0; i < size; i++){
+			list.add(new Double(ar[i]));
+		}
+		return list;
 	}
 }
