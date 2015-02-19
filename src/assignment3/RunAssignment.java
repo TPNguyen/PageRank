@@ -40,18 +40,18 @@ public class RunAssignment {
 		time = (end - begin)/1000;
 		//System.out.println("mcApprox R3: " + monteApprox);
 		System.out.println("Time elapsed R3: " + time);
-		System.out.println("Error R=1 K=10" + absoluteError(mc,10,1,rEnd));
-		System.out.println("Error R=1 K=30" + absoluteError(mc,30,1,rEnd));
-		System.out.println("Error R=1 K=50" + absoluteError(mc,50,1,rEnd));
-		System.out.println("Error R=1 K=100" + absoluteError(mc,100,1,rEnd));
-		System.out.println("Error R=3 K=10" + absoluteError(mc,10,3,rEnd));
-		System.out.println("Error R=3 K=30" + absoluteError(mc,30,3,rEnd));
-		System.out.println("Error R=3 K=50" + absoluteError(mc,50,3,rEnd));
-		System.out.println("Error R=3 K=100" + absoluteError(mc,100,3,rEnd));
-		System.out.println("Error R=5 K=10" + absoluteError(mc,10,5,rEnd));
-		System.out.println("Error R=5 K=30" + absoluteError(mc,30,5,rEnd));
-		System.out.println("Error R=5 K=50" + absoluteError(mc,50,5,rEnd));
-		System.out.println("Error R=5 K=100" + absoluteError(mc,100,5,rEnd));
+		System.out.println("Average Error R=1 K=10 " + absoluteError(mc,10,1,rEnd));
+		System.out.println("Average Error R=1 K=30 " + absoluteError(mc,30,1,rEnd));
+		System.out.println("Average Error R=1 K=50 " + absoluteError(mc,50,1,rEnd));
+		System.out.println("Average Error R=1 K=100 " + absoluteError(mc,100,1,rEnd));
+		System.out.println("Average Error R=3 K=10 " + absoluteError(mc,10,3,rEnd));
+		System.out.println("Average Error R=3 K=30 " + absoluteError(mc,30,3,rEnd));
+		System.out.println("Average Error R=3 K=50 " + absoluteError(mc,50,3,rEnd));
+		System.out.println("Average Error R=3 K=100 " + absoluteError(mc,100,3,rEnd));
+		System.out.println("Average Error R=5 K=10 " + absoluteError(mc,10,5,rEnd));
+		System.out.println("Average Error R=5 K=30 " + absoluteError(mc,30,5,rEnd));
+		System.out.println("Average Error R=5 K=50 " + absoluteError(mc,50,5,rEnd));
+		System.out.println("Average Error R=5 K=100 " + absoluteError(mc,100,5,rEnd));
 	}
 	
 	private static double absoluteError(MonteCarlo mc, int k, int rWalks, ArrayList<Double> trueValue){
@@ -64,15 +64,15 @@ public class RunAssignment {
 			Collections.reverse(scores);
 			for(int j = 0; j < k; j++){
 				Score a = scores.get(j);
-				kError = kError + (trueValue.get(a.index) - a.score);
+				kError = kError + Math.abs((trueValue.get(a.index) - a.score));
 			}
-			overAllError = overAllError + (double)kError/k;
+			overAllError = overAllError + kError/(double)k;
 		}
-		overAllError = (double)overAllError/(100);
+		overAllError = overAllError/(double)(100);
 		return overAllError;
 	}
 	
-	//Very inefficient
+	//Very inefficient, can do this linear (no need to do all of this and then sort
 	private static ArrayList<Score> convertToScore(double[] approx){
 		ArrayList<Score> scores = new ArrayList<Score>();
 		for(int i = 0; i < approx.length; i++){
@@ -121,6 +121,10 @@ public class RunAssignment {
 			}else{
 				return 1;
 			}
+		}
+		
+		public String toString(){
+			return "score: " + score + " index: " + index;
 		}
 	}
 	
