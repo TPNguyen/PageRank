@@ -32,7 +32,7 @@ public class PageRank {
 			Matrix.constMultVector(beta,r);
 			r = Matrix.addVectors(teleport,r);
 		}
-		return r;
+		return copyArray(r);
 	}
 	
 	private void initializeMatrix(){
@@ -49,15 +49,36 @@ public class PageRank {
 	}
 	
 	public double[][] getMatrix(){
-		return M;
+		return copyMatrix(M);
 	}
 	
 	public double[] getRankings(){
-		return r;
+		return copyArray(r);
 	}
 	
 	public double[] getTeleport(){
-		return teleport;
+		return copyArray(teleport);
+	}
+	
+	public ArrayList<Edge> getEdges(){
+		return new ArrayList<Edge>(edges);
+	}
+	
+	private static double[] copyArray(double[] src){
+		int size = src.length;
+		double[] dest = new double[size];
+		System.arraycopy(src,0,dest,0,size); 
+		return dest;
+	}
+	
+	private static double[][] copyMatrix(double[][] srcMatrix){
+		int numRows = srcMatrix.length;
+		int numCols = srcMatrix[0].length;
+		double[][] destMatrix = new double[numRows][numCols];
+		for(int i = 0; i < numRows; i++){
+			System.arraycopy(srcMatrix[i],0,destMatrix[i],0,numCols);
+		}
+		return destMatrix;
 	}
 	
 	private void readEdges(String file){

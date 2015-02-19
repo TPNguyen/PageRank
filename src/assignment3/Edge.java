@@ -40,7 +40,7 @@ public class Edge implements Comparator<Edge>, Comparable<Edge>{
 		}
 	}
 
-	// Overriding the compare method to sort by size
+	// Overriding the compare method to sort by node index
 	// Sorting by the to node is more efficient
 	public int compare(Edge ed1, Edge ed2){
 		int result = ed1.to - ed2.to;
