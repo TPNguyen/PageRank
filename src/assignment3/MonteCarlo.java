@@ -1,6 +1,5 @@
 package assignment3;
 
-
 import java.util.*;
 
 public class MonteCarlo {
@@ -20,7 +19,19 @@ public class MonteCarlo {
 	}
 	
 	public double[] randomWalk(int RTimes){
+		for(int i = 0; i < numNodes; i++){
+			for(int r = 0; r < RTimes; r++){
+				if(nextJump.containsKey(i)){
+					ArrayList<Edge> possibilities = nextJump.get(i);
+					//Need to randomly pick one of these
+				}
+			}
+		}
 		return null;
+	}
+	
+	public double[] getRankings(){
+		return Matrix.copyArray(rScores);
 	}
 	
 	private void populateMap(){

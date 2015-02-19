@@ -32,7 +32,7 @@ public class PageRank {
 			Matrix.constMultVector(beta,r);
 			r = Matrix.addVectors(teleport,r);
 		}
-		return copyArray(r);
+		return Matrix.copyArray(r);
 	}
 	
 	private void initializeMatrix(){
@@ -43,42 +43,25 @@ public class PageRank {
 			Edge edge = edges.get(i);
 			int to = edge.to;
 			int from = edge.from;
-			M[to-1][from-1] = M[to-1][from-1] + 1;
+			M[to][from] = M[to][from] + 1;
 		}
 		Matrix.constrainSumToOne(M);
 	}
 	
 	public double[][] getMatrix(){
-		return copyMatrix(M);
+		return Matrix.copyMatrix(M);
 	}
 	
 	public double[] getRankings(){
-		return copyArray(r);
+		return Matrix.copyArray(r);
 	}
 	
 	public double[] getTeleport(){
-		return copyArray(teleport);
+		return Matrix.copyArray(teleport);
 	}
 	
 	public ArrayList<Edge> getEdges(){
 		return new ArrayList<Edge>(edges);
-	}
-	
-	private static double[] copyArray(double[] src){
-		int size = src.length;
-		double[] dest = new double[size];
-		System.arraycopy(src,0,dest,0,size); 
-		return dest;
-	}
-	
-	private static double[][] copyMatrix(double[][] srcMatrix){
-		int numRows = srcMatrix.length;
-		int numCols = srcMatrix[0].length;
-		double[][] destMatrix = new double[numRows][numCols];
-		for(int i = 0; i < numRows; i++){
-			System.arraycopy(srcMatrix[i],0,destMatrix[i],0,numCols);
-		}
-		return destMatrix;
 	}
 	
 	private void readEdges(String file){
@@ -94,7 +77,7 @@ public class PageRank {
 				str = line.split("\\s+");
 				int from = Integer.parseInt(str[0]);
 				int to = Integer.parseInt(str[1]);
-				edges.add(new Edge(from,to));
+				edges.add(new Edge(from-1,to-1));
 			}
 			br.close();
 			return;

@@ -56,6 +56,14 @@ public class Matrix {
 		}
 	}
 	
+	//Multiplies matrix by a scalar
+	public static void constMultMatrix(double scalar, double[][] matrix){
+		int numRows = matrix.length;
+		for(int i = 0; i < numRows; i++){
+			constMultVector(scalar,matrix[i]);
+		}
+	}	
+	
 	//Multiplies vector by a scalar
 	public static void constMultVector(double scalar, double[] vector){
 		int size = vector.length;
@@ -80,5 +88,22 @@ public class Matrix {
 			list.add(new Double(ar[i]));
 		}
 		return list;
+	}
+	
+	public static double[] copyArray(double[] src){
+		int size = src.length;
+		double[] dest = new double[size];
+		System.arraycopy(src,0,dest,0,size); 
+		return dest;
+	}
+	
+	public static double[][] copyMatrix(double[][] srcMatrix){
+		int numRows = srcMatrix.length;
+		int numCols = srcMatrix[0].length;
+		double[][] destMatrix = new double[numRows][numCols];
+		for(int i = 0; i < numRows; i++){
+			System.arraycopy(srcMatrix[i],0,destMatrix[i],0,numCols);
+		}
+		return destMatrix;
 	}
 }
