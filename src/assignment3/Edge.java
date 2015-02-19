@@ -28,15 +28,28 @@ public class Edge implements Comparator<Edge>, Comparable<Edge>{
 	
 	// Overriding the compareTo method
 	public int compareTo(Edge ed){
-		Integer thisFrom = new Integer(this.from);
-		Integer edFrom = new Integer(ed.from);
-		return thisFrom.compareTo(edFrom);
+		Integer thisTo = new Integer(this.to);
+		Integer edTo = new Integer(ed.to);
+		int result = thisTo.compareTo(edTo);
+		if(result == 0){
+			Integer thisFrom = new Integer(this.from);
+			Integer edFrom = new Integer(ed.from);
+			return thisFrom.compareTo(edFrom);
+		}else{
+			return result;
+		}
 	}
 
 	// Overriding the compare method to sort by size
-	// Sort by the from node
+	// Sorting by the to node is more efficient
 	public int compare(Edge ed1, Edge ed2){
-		return ed1.from - ed2.from;
+		int result = ed1.to - ed2.to;
+		if(result == 0){
+			//Sort by from if they point to the same node
+			return ed1.from - ed2.from;
+		}else{
+			return result;
+		}
 	}
    
 	public String toString(){
