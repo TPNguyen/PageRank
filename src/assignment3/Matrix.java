@@ -25,6 +25,16 @@ public class Matrix {
 		return result;
 	}
 	
+	public static double[] addVectors(double[] a, double[] b){
+		if(a.length != b.length) return null;
+		int size = a.length;
+		double[] result = new double[size];
+		for(int i = 0; i < size; i++){
+			result[i] = a[i] + b[i];
+		}
+		return result;
+	}
+	
 	//Makes sure the components of the matrices column vector sum to one
 	public static void constrainSumToOne(double[][] matrix){
 		int numRows = matrix.length;
@@ -44,6 +54,7 @@ public class Matrix {
 		}
 	}
 	
+	//Multiplies vector by a scalar
 	public static void constMultVector(double scalar, double[] vector){
 		int size = vector.length;
 		for(int i = 0; i < size; i++){
@@ -51,6 +62,7 @@ public class Matrix {
 		}
 	}
 	
+	//Returns a vector with each element  as the value
 	public static double[] makeVector(int size, double value){
 		double[] ar = new double[size];
 		for(int i = 0; i < size; i++){
